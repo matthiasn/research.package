@@ -82,12 +82,14 @@ class RPUIChoiceQuestionBodyState extends State<RPUIChoiceQuestionBody>
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text((widget.answerFormat.answerStyle ==
-                    RPChoiceAnswerStyle.MultipleChoice)
-                ? "(${locale?.translate('choose_one_or_more_options') ?? 'Choose one or more options'})"
-                : "(${locale?.translate('choose_one_option') ?? 'Choose one option'})")),
+        if (widget.answerFormat.answerStyle ==
+            RPChoiceAnswerStyle.MultipleChoice)
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text((widget.answerFormat.answerStyle ==
+                      RPChoiceAnswerStyle.MultipleChoice)
+                  ? "(${locale?.translate('choose_one_or_more_options') ?? 'Choose one or more options'})"
+                  : "(${locale?.translate('choose_one_option') ?? 'Choose one option'})")),
         ListView.builder(
           shrinkWrap: true,
           itemCount: widget.answerFormat.choices.length,
@@ -142,7 +144,7 @@ class _ChoiceButtonState extends State<_ChoiceButton> {
       padding: const EdgeInsets.only(left: 4, right: 4),
       child: InkWell(
         onTap: () => widget.selectedCallBack(widget.choice),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+        child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           (widget.answerStyle == RPChoiceAnswerStyle.SingleChoice)
               ? Radio(
                   value: widget.choice,
@@ -167,15 +169,7 @@ class _ChoiceButtonState extends State<_ChoiceButton> {
             child: Container(
               padding: widget.choice.isFreeText
                   ? null
-                  : const EdgeInsets.only(bottom: 13),
-              decoration: !widget.isLastChoice
-                  ? BoxDecoration(
-                      border: Border(
-                        bottom:
-                            BorderSide(color: Theme.of(context).dividerColor),
-                      ),
-                    )
-                  : null,
+                  : const EdgeInsets.symmetric(vertical: 16),
               child: widget.choice.isFreeText
                   ? TextField(
                       onChanged: (newText) => widget.choice.text = newText,
