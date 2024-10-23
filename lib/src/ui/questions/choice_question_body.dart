@@ -157,6 +157,7 @@ class _ChoiceButtonState extends State<_ChoiceButton> {
                       ? Theme.of(context).primaryColor
                       : CupertinoTheme.of(context).primaryColor,
                 ),
+          SizedBox(width: 10),
           Expanded(
             child: Container(
               padding: widget.choice.isFreeText
