@@ -291,12 +291,13 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Top bar
               _carouselBar(locale),
 
               // Body
-              Expanded(
+              Flexible(
                 child: PageView.builder(
                   itemBuilder: (BuildContext context, int position) =>
                       _activeSteps[position].stepWidget,

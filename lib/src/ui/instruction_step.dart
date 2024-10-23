@@ -40,8 +40,8 @@ class RPUIInstructionStepState extends State<RPUIInstructionStep> {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
+          Container(
+            child: Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
