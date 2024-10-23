@@ -297,7 +297,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
               _carouselBar(locale),
 
               // Body
-              Flexible(
+              Expanded(
                 child: PageView.builder(
                   itemBuilder: (BuildContext context, int position) =>
                       _activeSteps[position].stepWidget,

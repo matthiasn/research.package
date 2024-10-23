@@ -135,9 +135,9 @@ class RPUIQuestionStepState extends State<RPUIQuestionStep> with CanSaveResult {
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.all(8),
+            Container(
+              padding: const EdgeInsets.all(8),
+              child: Column(
                 children: [
                   // Title
                   Padding(

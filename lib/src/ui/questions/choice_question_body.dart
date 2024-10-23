@@ -60,20 +60,6 @@ class RPUIChoiceQuestionBodyState extends State<RPUIChoiceQuestionBody>
         : widget.onResultChange(null);
   }
 
-  Widget _choiceCellBuilder(BuildContext context, int index) {
-    return _ChoiceButton(
-      choice: widget.answerFormat.choices[index],
-      selectedCallBack: _buttonCallBack,
-      selected: selectedChoices.contains(widget.answerFormat.choices[index])
-          ? true
-          : false,
-      currentChoices: selectedChoices,
-      index: index,
-      isLastChoice: index == widget.answerFormat.choices.length - 1,
-      answerStyle: widget.answerFormat.answerStyle,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -90,12 +76,18 @@ class RPUIChoiceQuestionBodyState extends State<RPUIChoiceQuestionBody>
                       RPChoiceAnswerStyle.MultipleChoice)
                   ? "(${locale?.translate('choose_one_or_more_options') ?? 'Choose one or more options'})"
                   : "(${locale?.translate('choose_one_option') ?? 'Choose one option'})")),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: widget.answerFormat.choices.length,
-          itemBuilder: _choiceCellBuilder,
-          physics: const NeverScrollableScrollPhysics(),
-        ),
+        ...widget.answerFormat.choices.map((choice) {
+          return _ChoiceButton(
+            choice: choice,
+            selectedCallBack: _buttonCallBack,
+            selected: selectedChoices.contains(choice),
+            currentChoices: selectedChoices,
+            index: widget.answerFormat.choices.indexOf(choice),
+            isLastChoice: widget.answerFormat.choices.indexOf(choice) ==
+                widget.answerFormat.choices.length - 1,
+            answerStyle: widget.answerFormat.answerStyle,
+          );
+        }),
       ],
     );
   }
